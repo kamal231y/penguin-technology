@@ -1,0 +1,145 @@
+::selection {
+    /* user-select: none; */
+    background: #ffa100;
+    color: #fff;
+}
+
+.slider.slick-dotted.slick-slider {
+    margin: 0px;
+    line-height: 0;
+}
+
+.slider .slick-slide {
+    margin: 0px;
+}
+
+.slider .slick-dots{
+    bottom: 35px;
+}
+
+.slider .slider_img img {
+    width: 100%;
+}
+
+.header-top .social-icon li{
+    display: inline;
+}
+
+.header-top .social-icon li a i{
+    color: #fff;
+    background: #021c2d;
+    padding: 4px;
+    /* width: 25px; */
+    /* height: 25px; */
+    text-align: center;
+    transition: .5s;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    margin-left: 5px;
+}
+
+.header-top .social-icon li a i:hover{
+    color: #ffa100;
+    background: #fff;
+    transition: .5s;
+    border: 2px solid #ffa100;
+}
+
+/* .home-slider .slick-prev {
+    left: 0px;
+}
+
+.home-slider .slick-next {
+    right: 0px;
+}
+
+.home-slider .slick-prev, .home-slider .slick-next {
+    color: #db3c3c;
+    background: #fff;
+    border-radius: 0;
+} */
+
+
+.course-content  h4{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.featured-desc.line_limit p{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    display: none;
+}
+
+.featured-desc.line_limit h2, .featured-desc.line_limit h3, .featured-desc.line_limit h4, .featured-desc.line_limit h5, .featured-desc.line_limit img, .featured-desc.line_limit p, .featured-desc.line_limit ul{
+    display: none !important;
+}
+
+.featured-desc.line_limit p:first-child{
+    font-size: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+.whatsapp-icon {
+    position: fixed;
+    bottom: 4%;
+    left: 2%;
+    z-index: 9999;
+}
+
+.enquiry-button {
+    position: fixed;
+    bottom: 4%;
+    right: 2%;
+    z-index: 9999;
+}
+
+.enquiry-button button {
+    text-align: center;
+    background: #ffbf30;
+    padding: 12px;
+    border-radius: 50%;
+    font-size: 30px;
+    color: #fff;
+    line-height: 30px;
+    border: none;
+}
+
+.whatsapp-icon a i {
+    background: rgb(0 178 9);
+    padding: 14px 12px;
+    border-radius: 50%;
+    font-size: 30px;
+    color: #fff;
+    line-height: 27px;
+}
+
+#enquiryModal .modal-header {
+    background: #002b46;
+}
+
+#enquiryModal .modal-title {
+    font-size: 18px;
+    color: #fff;
+}
+
+#enquiryModal .close-btn {
+    background: none;
+    border: none;
+    line-height: 0;
+    outline: none;
+}

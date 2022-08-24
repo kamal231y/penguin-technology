@@ -1,0 +1,144 @@
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 250px; /* Set a default minimum width */
+    margin-left: -125px; /* Divide value of min-width by 2 */
+    background-color: #333; /* black background color */
+    color: #fff; /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 16px; /* Padding */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 999; /* Add a z-index if needed */
+    left: 50%; /* Center the snackbar */
+    bottom: 30px; /* 30px from the bottom */
+  }
+  .wd-5{
+    width: 2%;
+  }
+  /* Show the snackbar when clicking on a button (class added with JavaScript) */
+  #snackbar.show {
+    visibility: visible; /* Show the snackbar */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+    However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  
+  /* Animations to fade the snackbar in and out */
+  @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+
+  button:disabled {
+    cursor: no-drop;
+  }
+  
+  /* .action-btns{
+    float: right;
+    position: absolute;
+    bottom: 0;
+    right: 5%;
+    margin: 2%;
+  } */
+
+  .delete_close{
+    right: 2%;
+    position: absolute;
+    margin: 1%;
+  }
+
+  .loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    position: absolute;
+    top: 35%;
+    display: none;
+    left: 50%;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+
+  .mandatory{
+    color: red;
+    font-size: 14px;
+  }
+
+  [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+  }
+
+  .pagination li a {
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+  }
+  
+  .pagination li.active a{
+    color: white;
+    background-color: #058c5e;
+  }
+
+.wd-10{
+  width: 10%;
+}
+.wd-14{
+  min-width: 14%;
+}
+
+.edit_show_img {
+  width: 100%;
+}
+.droplogout {
+  width: 165px;
+  left: 89%;
+}
+.droplogout hr{
+  margin: 8px 0px;
+}
+.action_width{
+  width: 12%;
+}
+.wd-120 {
+  width: 120px;
+}
+@media only screen and (min-width: 1350px) and (max-width: 1920px) {
+  .action_width{
+    width: 15%;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 1350px) {
+  .action_width{
+    width: 18%;
+  }
+}

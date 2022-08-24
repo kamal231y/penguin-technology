@@ -1,0 +1,200 @@
+<?php
+session_start();
+session_regenerate_id();
+if (!$_SESSION['PenguAdmin']) {
+    header("location:index.php");
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <?php include "include/css-url.php"; ?>
+    <style>
+        .mr-lf-2-per {
+            margin-left: 2%;
+        }
+
+        .mr-tp-1-per {
+            margin-top: 2.5%;
+        }
+
+        .mr-tp-4-per {
+            margin-top: 4%;
+        }
+
+        .wd-40 {
+            width: 17%;
+        }
+    </style>
+</head>
+
+<body ng-app="pengu" ng-controller="blog-ctrl" ng-init="getData()">
+
+    <div id="main-wrapper">
+        <?php include "include/header.php"; ?>
+        <?php include "include/sidebar.php"; ?>
+
+
+        <div class="content-body">
+            <!-- row -->
+            <div class="container-fluid">
+                <form ng-submit="saveData()" name="myForm" autocomplete="off">
+                    <div class="row page-titles mx-0">
+                        <!-- <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                <label for="myfile">Image</label>
+                                <input type="file" id="myfile" name="myfile" class="form-control">
+                            </div>
+                        </div> -->
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                <label>Image (png,jpeg,jpg) (1000x500 in pixel, Max size 1MB)<sup class="mandatory">*</sup> </label>
+                                <div class="input-group mb-3">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="packageFile" file-input="packageFile" onchange="angular.element(this).scope().uploadImg(this)" accept="image/*" ng-required="!selectedId">
+                                        <label class="custom-file-label">Choose file</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="selectImg">
+                                <img class="wd-40 mb-4" id="imgPreview" src="{{selectImg}}">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                <label for="input-rounded" class="control-label"> Name<sup class="mandatory">*</sup></label>
+                                <input type="text" class="form-control" placeholder="Name" ng-model="itemObject.name">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="form-group">
+                                <label for="input-rounded" class="control-label"> Title<sup class="mandatory">*</sup></label>
+                                <input type="text" class="form-control" placeholder="Title" ng-model="itemObject.title">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="input-rounded" class="control-label">Short Description<sup class="mandatory">*</sup></label>
+                                <textarea id="textareaTinymc1" class="form-control" rows="5" id="comment" placeholder="Short Description" spellcheck="false" data-gramm="false" ng-model="itemObject.shortDescription"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="input-rounded" class="control-label"> Description<sup class="mandatory">*</sup></label>
+                                <textarea id="textareaTinymc2" class="form-control" rows="5" id="comment" placeholder="Description" spellcheck="false" data-gramm="false" ng-model="itemObject.description"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label></label>
+                            <div class="input-group mb-3  mr-tp-1-per">
+                                <button type="submit" title="Submit" class="btn btn-info">Submit</i></button>
+                                <button type="button" title="Cancel" class="btn btn-danger mr-lf-2-per" ng-click="cancel()">Cancel</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="showmargin" style="float:left;" ng-init="count='10'">
+                                            <label>Show </label>
+                                            <select class="entries" name="count" ng-model="itemsPerPage">
+                                                <option ng-value="10" selected="selected">10</option>
+                                                <option ng-value="20">20</option>
+                                                <option ng-value="50">50</option>
+                                                <option ng-value="70">70</option>
+                                                <option ng-value="100">100</option>
+                                            </select>
+                                            <label for="">Entries</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 offset-6">
+                                        <div class="form-group">
+                                            <input type="search" class="form-control" placeholder="search..." ng-model="filterPro">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>S.no</th>
+                                                <th>Image</th>
+                                                <th>Name</th>
+                                                <th>Date</th>
+                                                <th>Title</th>
+                                                <th class="wd-14">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr dir-paginate="item in items=(tableList | filter:filterPro) | itemsPerPage: itemsPerPage" current-page='currentPage'>
+                                                <td>{{($index + 1) + (currentPage - 1) * itemsPerPage}}</td>
+                                                <td>
+                                                    <img class="wd-40" src="{{baseUrl}}{{item.image_url}}" alt="">
+                                                </td>
+                                                <td>{{item.name}}</td>
+                                                <td>{{item.created_at | date:'dd-MMM-yyyy'}}</td>
+                                                <td>{{item.title}}</td>
+                                                <td>
+                                                    <a type="button" title="View" class="btn btn-primary mr-1" href="view-blog-detail.php?id={{item.id}}"><i class="fa fa-eye"></i></a>
+                                                    <button type="button" data-toggle="tooltip" title="Edit" class="btn btn-primary  mr-1" ng-click="editItem(item)"><i class="fa fa-edit"></i></button>
+                                                    <button type="button" title="Delete" class="btn btn-danger" ng-click="deleteModal(item)"><i class="fa fa-trash"></i></button>
+                                                </td>
+                                            </tr>
+                                            <tr ng-if="items && !items.length">
+                                                <td class="text-center" colspan="15">
+                                                    Data Not Available
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div style="margin: 10px;">
+                                    <dir-pagination-controls class="pull-right pagination" max-size="8" direction-links="true" boundary-links="true"></dir-pagination-controls>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <?php include "include/footer.php"; ?>
+
+
+    </div>
+    <?php include "include/js-url.php"; ?>
+    <script>
+        tinymce.init({
+            selector: "textarea",
+            height: 150,
+            theme: "modern",
+            plugins: "print preview fullpage paste searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount spellchecker imagetools contextmenu colorpicker textpattern",
+            toolbar1: "formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat",
+            image_advtab: true,
+            templates: [{
+                    title: "Test template 1",
+                    content: "Test 1"
+                },
+                {
+                    title: "Test template 2",
+                    content: "Test 2"
+                }
+            ],
+            content_css: [
+                // "//fonts.googleapis.com/css?family=Lato:300,300i,400,400i",
+                // "//www.tinymce.com/css/codepen.min.css"
+            ]
+        });
+    </script>
+
+</body>
+
+</html>

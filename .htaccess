@@ -1,0 +1,19 @@
+# Redirecting to https forcefully.
+RewriteEngine ON
+#RewriteCond %{HTTPS} off
+#RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Don't rewrite files or directories
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Rewrite everything else to index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+#RewriteEngine ON
+RewriteRule ^details/?$ details.php [NC,L,QSA]
+RewriteRule ^details/([^/]+)/?.php$ details.php?destName=$1 [NC,L,QSA]
+RewriteRule ^details/([^/]+)/([^/]+)/?$ details.php?destName=$1id=$2 [NC,L,QSA]
+
